@@ -1,0 +1,338 @@
+﻿@{Layout = null;}
+@model Competition_Blasts_Project.Models.Admin
+
+<html>
+<head>
+    <title>Setting</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#updateFName").click(function () {
+                $("#textFName").slideToggle("slow");
+                $("#submitFName").slideToggle("slow");
+            });
+            $("#updateLName").click(function () {
+                $("#textLName").slideToggle("slow");
+                $("#submitLName").slideToggle("slow");
+            });
+            $("#updateMobile").click(function () {
+                $("#uMobile").slideToggle("slow");
+                $("#sMobile").slideToggle("slow");
+            });
+            $("#updateAddress").click(function () {
+                $("#uAddress").slideToggle("slow");
+                $("#sAddress").slideToggle("slow");
+            });
+            $("#updateCity").click(function () {
+                $("#uCity").slideToggle("slow");
+                $("#sCity").slideToggle("slow");
+            });
+            $("#updatePassword").click(function () {
+                $("#Password").slideToggle("slow");
+                $("#nPassword").slideToggle("slow");
+                $("#nRPassword").slideToggle("slow");
+                $("#sPassword").slideToggle("slow");
+            });
+            $("#submitFName").click(function () {
+                var serviceURL1 = '/Admin/UpdateFName';
+                var fname = $("#textFName").val();
+                if (fname !== null) {
+                    $.ajax({
+                        type: "Post",
+                        url: serviceURL1,
+                        success: successFunc,
+                        data: { 'fname': fname },
+                        error: errorFunc
+                    });
+
+                    function successFunc(data) {
+                        $("#textFName").slideToggle("slow");
+                        $("#submitFName").slideToggle("slow");
+                        $("#FName").html(data);
+                    }
+                    function errorFunc()
+                    {
+                        alert("Error");
+                    }
+                }
+                else
+                    alert("Field is Empty");
+            });
+            $("#submitLName").click(function () {
+                var serviceURL1 = '/Admin/UpdateLName';
+                var lname = $("#textLName").val();
+                if (lname !== null) {
+                    $.ajax({
+                        type: "Post",
+                        url: serviceURL1,
+                        success: successFunc,
+                        data: { 'lname': lname },
+                        error: errorFunc
+                    });
+
+                    function successFunc(data) {
+                        $("#textLName").slideToggle("slow");
+                        $("#submitLName").slideToggle("slow");
+                        $("#LName").html(data);
+                    }
+                    function errorFunc() {
+                        alert("Error");
+                    }
+                }
+                else
+                    alert("Field is Empty");
+            });
+            $("#sMobile").click(function () {
+                var serviceURL1 = '/Admin/UpdateM';
+                var mob = $("#uMobile").val();
+                if (mob !== null) {
+                    alert("Going to update Mobile")
+                    $.ajax({
+                        type: "Post",
+                        url: serviceURL1,
+                        success: successFunc,
+                        data: { 'mob': mob },
+                        error: errorFunc
+                    });
+
+                    function successFunc(data) {
+                        $("#uMobile").slideToggle("slow");
+                        $("#sMobile").slideToggle("slow");
+                        $("#m").html(data);
+                    }
+                    function errorFunc() {
+                        alert("Error");
+                    }
+                }
+                else
+                    alert("Field is Empty");
+            });
+            $("#sAddress").click(function () {
+                var serviceURL1 = '/Admin/UpdateAdd';
+                var add = $("#uAddress").val();
+                if (add !== null) {
+                    $.ajax({
+                        type: "Post",
+                        url: serviceURL1,
+                        success: successFunc,
+                        data: { 'add': add },
+                        error: errorFunc
+                    });
+
+                    function successFunc(data) {
+                        $("#uAddress").slideToggle("slow");
+                        $("#sAddress").slideToggle("slow");
+                        $("#a").html(data);
+                    }
+                    function errorFunc() {
+                        alert("Error");
+                    }
+                }
+                else
+                    alert("Field is Empty");
+            });
+            $("#sCity").click(function () {
+                var serviceURL1 = '/Admin/UpdateCity';
+                var city = $("#uCity").val();
+                if (city !== null) {
+                    $.ajax({
+                        type: "Post",
+                        url: serviceURL1,
+                        success: successFunc,
+                        data: { 'city': city },
+                        error: errorFunc
+                    });
+
+                    function successFunc(data) {
+                        $("#uCity").slideToggle("slow");
+                        $("#sCity").slideToggle("slow");
+                        $("#c").html(data);
+                    }
+                    function errorFunc() {
+                        alert("Error");
+                    }
+                }
+                else
+                    alert("Field is Empty");
+            });
+            $("#sPassword").click(function () {
+                var serviceURL1 = '/Admin/UpdatePassword';
+                var p1 = $("#Password").val();
+                var p2 = $("#nPassword").val();
+                var p3 = $("#nRPassword").val();
+                if (p2 !== null) {
+                    var current = '@Model.Password';
+                    if (current === p1 && p2 === p3) {
+                        $.ajax({
+                            type: "Post",
+                            url: serviceURL1,
+                            success: successFunc,
+                            data: { 'p2': p2 },
+                            error: errorFunc
+                        });
+
+                        function successFunc(data) {
+                            $("#uCity").slideToggle("slow");
+                            $("#sCity").slideToggle("slow");
+                            $("#c").html(data);
+                        }
+                        function errorFunc() {
+                            alert("Error");
+                        }
+                    }
+                    else
+                        alert("Provided Password does not Match");
+                }
+                else
+                    alert("Field is Empty");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ff5454;">
+        <div id="header">
+            <ul>
+                <li>
+                    @Html.ActionLink("Profile", "Profile", "Admin");
+                </li>
+                <li>
+                    @Html.ActionLink("People", "People", "Admin");
+                </li>
+                <li>
+                    @Html.ActionLink("Subject", "Subject", "Admin");
+                    <ul>
+                        <li>
+                            @Html.ActionLink("Add Subject", "Subject", "Admin");
+                        </li>
+                        <li>
+                            @Html.ActionLink("Add Questions", "Subject", "Admin");
+                        </li>
+                        <li>
+                            @Html.ActionLink("Update Questions", "Subject", "Admin");
+                        </li>
+                    </ul>
+                </li>
+                <li style="width: 220px">
+                    @Html.ActionLink(Model.FirstName, "Profile", "Admin");
+                    <ul style="width: 220px">
+                        <li>
+                            @Html.ActionLink("Setting", "Setting", "Admin");
+                        </li>
+                        <li>
+                            @Html.ActionLink("Logout", "Logout", "Home");
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function show(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+                filerdr.onload = function (e) {
+                    $('#coverImg').attr('src', e.target.result);
+                    $("#imgSave").show("slow");
+
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+        function show1(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+
+                filerdr.onload = function (e) {
+                    $('#profileImg').attr('src', e.target.result);
+                    $("#imgSave1").show("slow");
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+    <div id="profile" style="height: 100%;  background-color: #333;">
+        <div id="profilepic" style="height: 100%;">
+
+            @Html.BeginForm("SaveImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })
+            <img src="@Url.Content(Model.CoverImagePath)" class="cover" id="coverImg">
+            <input type="file" style="width:100%; position: absolute; margin-top: -25.5%; margin-left: 50%; border-radius: 50%;" onchange="show(this)">
+            <h2 id="hh" style="margin-top: -50%;">@Model.FirstName @Model.LastName</h2>
+            <input id="imgSave" type="submit" value="Save" style="display: none; width: 40%; position: absolute; margin-top: -13.5%; margin-left: 45%; color: #333; background-color: #ff5454; font-size: 17px">
+
+            <img src="@Url.Content(Model.ProfileImagePath)" class="pic" style="margin-top: 80%; width: 50%;" id="profileImg">
+            <input type="file" style="width:100%; position: absolute; margin-top: 51.5%; margin-left: 12%; border-radius: 50%;" onchange="show1(this)">
+            <input id="imgSave1" type="submit" value="Save" style="display: none; width: 40%; position: absolute; margin-top: -1%; margin-left: 45%; color: #333; background-color: #ff5454; font-size: 17px">
+
+        </div>
+    </div>
+    <div id="updatebody">
+        <table border="0" style="width : 420px;background-color : #eeeeee;">
+            <tr>
+                <td>
+                    <p id="FName">First Name: @Model.FirstName</p>
+                    <input type="text" id="textFName" class="updateInfo" placeholder="Enter New First Name" style="display: none">
+                </td>
+                <td>
+                    <input id="updateFName" type="button" value="Update">
+                    <input id="submitFName" type="button" value="Submit" style="display: none">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="LName">Last Name: @Model.LastName</p>
+                    <input type="text" id="textLName" class="updateInfo" placeholder="Enter New Last Name" style="display: none">
+                </td>
+                <td>
+                    <input id="updateLName" type="button" value="Update">
+                    <input id="submitLName" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p id="m">Mobile: @Model.Mobile</p>
+                    <input type="text" id="uMobile" class="updateInfo" placeholder="Enter New Mobile Number" style="display: none">
+                </td>
+                <td>
+                    <input id="updateMobile" type="button" value="Update">
+                    <input id="sMobile" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p id="a">Address: @Model.Address</p>
+                    <input type="text" id="uAddress" class="updateInfo" placeholder="Enter New Address" style="display: none">
+                </td>
+                <td>
+                    <input id="updateAddress" type="button" value="Update">
+                    <input id="sAddress" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p id="c">City: @Model.City</p>
+                    <input type="text" id="uCity" class="updateInfo" placeholder="Enter New City" style="display: none">
+                </td>
+                <td>
+                    <input id="updateCity" type="button" value="Update">
+                    <input id="sCity" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p id="p">Password: @Model.Password</p>
+                    <input type="password" id="Password" class="updateInfo" placeholder="Enter Current Password" style="display: none">
+                    <input type="password" id="nPassword" class="updateInfo" placeholder="Enter New Password" style="display: none">
+                    <input type="password" id="nRPassword" class="updateInfo" placeholder="Renter New Password" style="display: none">
+                </td>
+                <td>
+                    <input id="updatePassword" type="button" value="Update">
+                    <input id="sPassword" type="button" value="Submit" style="display: none">
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

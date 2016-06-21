@@ -1,0 +1,63 @@
+﻿@{Layout = null;}
+
+<html>
+<head>
+    <title> Competition Blasts Login</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/script.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Password").blur(function () {
+                var p = $("#Password").val();
+                if (p.length < 5 || p.length > 49) {
+                    $("#showPassword").show("slow");
+                    $("#send").hide("slow");
+                }
+                else {
+                    $("#showPassword").hide("slow");
+                    $("#send").show("slow");
+                }
+            });
+            $("#rbtn1").click(function () {
+                $("#send").show("slow");
+            });
+            $("#rbtn2").click(function () {
+                $("#send").show("slow");
+            });
+
+        });
+    </script>
+</head>
+<body class="bodyImage">
+    <div class="divImage">
+        <div id="loginFields">
+            <img src="~/Images/c.png" class="loginImageLogo">
+            <br><br><br>
+            <h1><span>Log In with Email</span></h1>
+            <br><br>
+            <form name="loginForm" action="/Home/LoginProfile" method="post">
+                <input type="email" required name="Email" id="Email" placeholder="Email">
+                @Html.Password("Password", null, new { placeholder = "Password", id = "Password", required = "Required" })
+                <h3 id="showPassword" style="display: none; color:#ff5454; font-size:15px;">Your Password Length is Not Valid</h3>
+                <br>
+                <center style="float: left; margin-left: 40%;">
+                    <fieldset id="group1" style="border: none;">
+                        <br>
+                        <input id="rbtn1" type="radio" name="radiogr" value="admin" style="width:25px">
+                        <label class="radioButtonText"> <b> Admin </b> </label>
+                        <br>
+                        <input id="rbtn2"  type="radio" name="radiogr" value="player" style="width:25px">
+                        <label class="radioButtonText"> <b> Player </b> </label>
+
+                    </fieldset>
+                    <br>
+                    <input type="submit" name="submit" id="send" value="Log In" style="display: none;"/>
+                    </center>
+            </form>
+            <div id="insert">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

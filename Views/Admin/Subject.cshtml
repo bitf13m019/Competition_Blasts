@@ -1,0 +1,123 @@
+﻿@{Layout = null;}
+@model List<Competition_Blasts_Project.Models.Subject>
+<html>
+<head>
+    <title>Subject</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    @{
+        string i = Session["ID"].ToString();
+        int pid = int.Parse(i);
+        string fname = Session["FName"].ToString();
+        string lname = Session["LName"].ToString();
+        string cover = Session["Cover"].ToString();
+        string profile = Session["Profile"].ToString(); ;
+    }
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ff5454;">
+        <div id="header">
+            <ul>
+                <li>
+                    @Html.ActionLink("Profile", "Profile", "Admin");
+                </li>
+                <li>
+                    @Html.ActionLink("People", "People", "Admin");
+                </li>
+                <li>
+                    @Html.ActionLink("Subject", "Subject", "Admin");
+                    <ul>
+                        <li>
+                            @Html.ActionLink("Add Subject", "Subject", "Admin");
+                        </li>
+                        <li>
+                            @Html.ActionLink("Add Questions", "Subject", "Admin");
+                        </li>
+                        <li>
+                            @Html.ActionLink("Update Questions", "Subject", "Admin");
+                        </li>
+                    </ul>
+                </li>
+                <li style="width: 220px">
+                    @Html.ActionLink(fname, "Profile", "Admin");
+                    <ul style="width: 220px">
+                        <li>
+                            @Html.ActionLink("Setting", "Setting", "Admin");
+                        </li>
+                        <li>
+                            @Html.ActionLink("Logout", "Logout", "Home");
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="profile">
+        <div id="profilepic">
+            <img src="@Url.Content(profile)" class="cover">
+            <h2 id="hh">@fname @lname</h2>
+            <img src="@Url.Content(cover)" class="pic">
+        </div>
+    </div>
+    <br><br><br><br><br>
+    <table border="0" style="">
+        @{
+            int count = Model.Count;
+            bool flag = false;
+            if (count % 2 == 0)
+            {
+                flag = true;
+            }
+            else
+            {
+                count--;
+            }
+            for (int j = 0; j < count; j = j + 2)
+            {
+                <tr>
+                    <td>
+                            <button type="submit" name="Cn">
+                                <input type="image" name="cn" value="cn" src="@Url.Content(Model[j].ImagePath)" class="subjectStyle">
+                            </button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                    @if (j + 1 < count)
+                    {
+                        <td>
+                                <button type="submit" name="Cn">
+                                    <input type="image" name="cn" value="cn" src="@Url.Content(Model[j+1].ImagePath)" class="subjectStyle">
+                                </button>
+                        </td>
+                    }
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+            }
+            if (flag == false)
+            {
+                <tr>
+                    <td>
+                            <button type="submit" name="Cn">
+                                <input type="image" name="cn" value="cn" src="@Url.Content(Model[count].ImagePath)" class="subjectStyle">
+                            </button>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</body>
+</html>

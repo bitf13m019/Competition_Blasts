@@ -1,0 +1,523 @@
+h1 {
+    color: yellow;
+    margin-left: 40px;
+} 
+.bodyImage {
+    background-image: url('/Images/background.jpg');
+}
+.divImage{
+	margin: 0 auto; 
+	background-image: url('/Images/grid.jpg');
+	padding: 0% 0% 20.5% 0%; 
+	margin-top: -0.7%; 
+	width:80%;
+	height: 100%;
+}
+.imageLogo{
+	margin-left: 4%;
+	width:92%; 
+	height:80%;
+}
+.imageButton{
+	margin-top: 7%; 
+	margin-left:30%;
+	float: left;
+	width: 8%; 
+	height: 8%;
+}
+
+
+
+.loginImageLogo{
+	margin-left: 0.5%;
+	width:95%; 
+	height:16%;	
+}
+
+
+
+
+
+#loginFields {
+margin: 0;
+padding: 0 0 2px;
+text-align: center;
+}
+#loginFields h1 {
+color: #fff;
+display: inline;
+font-family: poller_oneregular;
+font-size: 25px;
+font-weight: normal;
+margin: 0;
+padding: 0;
+}
+#loginFields h1 span {
+background: #ff5454;
+display: inline-block;
+padding: 5px 5px 5px;
+}
+#loginFields > div {
+margin: 0 auto;
+padding: 0;
+width: 800px;
+}
+#loginFields form {
+margin: 0 auto;
+padding: 12px 0 0;
+width: 620px;
+}
+#loginFields form input {
+border: 2px solid #ff5454;
+color: #333;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 17px;
+font-weight: normal;
+margin: 0 0 7px;
+padding: 10px 5px;
+text-align: center;
+width: 400px;
+background-color:#2d99c0;
+font-style: bold;
+}
+#loginFields form textarea {
+height: 75px;
+overflow: auto;
+resize: none;
+}
+#loginFields form #send {
+background: #ff5454;
+color: #fff;
+font-family: "Arial Black", Gadget, sans-serif;
+font-size: 15px;
+font-weight: normal;
+display: inline-block;
+padding: 10px 10px;
+width: auto;
+}
+#loginFields form #send:hover {
+background: #fff;
+color: #252525;
+cursor: pointer;
+}
+
+
+
+
+
+#signUpFields {
+margin: 0;
+padding: 0 0 2px;
+text-align: center;
+}
+#signUpFields h1 {
+color: #fff;
+display: inline;
+font-family: poller_oneregular;
+font-size: 25px;
+font-weight: normal;
+margin: 0;
+padding: 0;
+}
+#signUpFields h1 span {
+background: #ff5454;
+display: inline-block;
+padding: 5px 5px 5px;
+}
+#signUpFields > div {
+margin: 0;
+padding: 0;
+width: 600px;
+}
+#signUpFields form {
+margin: 0 auto;
+padding: 7px 0 0;
+width: 620px;
+}
+#signUpFields form input {
+border: 2px solid #ff5454;
+color: #333;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 17px;
+font-weight: normal;
+margin: 0 0 7px;
+padding: 5px 2px;
+text-align: center;
+width: 240px;
+background-color:#2d99c0;
+font-style: bold;
+}
+#signUpFields form textarea {
+height: 75px;
+overflow: auto;
+resize: none;
+}
+#signUpFields form #send {
+background: #ff5454;
+color: #fff;
+font-family: "Arial Black", Gadget, sans-serif;
+font-size: 15px;
+font-weight: normal;
+display: inline-block;
+padding: 10px 10px;
+width: auto;
+}
+#signUpFields form #send:hover {
+background: #fff;
+color: #252525;
+cursor: pointer;
+}
+.radioButtonText{
+font-size:20px; 
+color:#333;
+}
+
+
+
+
+
+
+
+
+#profile {
+line-height:210%; 
+border-radius : 2% 2% 0% 0% ;
+background-color:white; 
+height:60%;
+width:32%;    
+float: left;
+margin-top : 3.2%;
+}
+body {background-color : #eeeeee}
+
+#profilepic {
+position: relative; 
+left: 0; 
+top: 0;
+margin-right: 20%; 
+border-radius: 4%;
+box-shadow: 0 2% 10% rgba(0,0,0,.1);
+}
+
+.cover { position: relative; top: 0; left: 0; border-radius : 3% 3% 0% 0%; width:121% ; height:60%;} 
+
+#hh {position : absolute ; top:44% ;left : 50% ; color : #fff ;font-size : 200%}
+
+.pic { position: absolute; bottom: 1%; left: 3%;
+margin-bottom : 5% ; margin-left : 3%;
+width :30% ; height : 40% ; border-radius : 100% ; border :4px solid #ff5454;
+}
+
+#starttopic {
+position: relative; overflow: hidden; 
+display: block; padding: 0% 10% 0% 0%; 
+font-size: 60%; font-weight: 700;
+line-height: 50%; background: black; width: 86.6%; height: 100%;
+}
+#competition {
+position: relative; height: 5%;
+width: 175%; color: #fff;
+border-bottom: 2px solid #666; text-align: center;
+}
+
+#buttonspec {
+display: inline-block; padding: 0 4%; border-radius: 2%;
+background: #ff5454; color: #fff; font-style: bold;
+border-radius : 12%; font-size:15px ; margin-bottom : 2%; margin-left : 2%;
+}
+
+#mainbody {
+float : right; width : 43% ; margin-right : 24%; margin-top : 5%;
+}
+
+
+#status {
+background: #fff; border-radius: 1%;
+box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}	
+
+#whatsup {
+width: 100%; height: 7em;
+border: 0; outline: 0;
+resize: none;
+}	
+
+#post {    
+background: #ff5454; cursor: default; font-size: 25px;
+color: #fff; padding: 0 20px; display: inline-block;
+}
+
+#header {
+position: fixed; top: 0; left: 0; z-index: 200;
+width: 100%; padding-right: 280px; background: #ff5454;
+height: 7.8%;
+}
+
+#header > ul {
+background: #ff5454; height: 49px; float: left;
+list-style: none; margin: 0; padding: 0;
+margin-left : 33%; width: 930px;
+}
+#header > ul > li {
+float: left; position: relative; width: 150px;
+}
+#header > ul > li > a {
+color: #f0f2c9; display: block; letter-spacing: 0.1em;
+line-height: 49px; text-align: center; text-decoration: none;
+}
+#header > ul > li.current > a,
+#header > ul > li.current > a:hover,
+#header ul li ul li.current a,
+#header ul li ul li.current a:hover {
+font : bold ; font-family : sans-serif ; background: #ff5454;
+color: #f0f2c9;
+}
+#header ul li a:hover {
+font-family : sans-serif ; background: #daead0;
+color: #1b330c;
+}
+#header ul li ul {
+list-style: none; left: -99999px; margin: 0;
+overflow: visible; padding: 11px 0 0;
+position: absolute; top: 49px; width: 150px;
+z-index: 2; font-family : sans-serif ;
+}
+#header ul li:hover ul {
+left: 0; top: 49px;  }
+#header ul li ul li {
+background: #ff5454; }
+#header ul li ul li a {
+font-family : sans-serif ; color: #f0f2c9;
+display: block; line-height: 31px;
+text-align: center; text-decoration: none;
+}
+
+#chatDiv { 
+float : right ; width : 22% ; height : 100% ;
+margin-top : -1%; background-color : #b4b4b4 ;
+position: fixed; top: 8%;
+right: 0; z-index: 100; background: #333;
+box-shadow: inset 10px 0 10px -10px #333,0 0 10px rgba(51,51,51,.3);
+transform: translateX(0);
+}
+#chatDiv1 {
+position: relative; height: 5%; color: #fff;
+border-bottom: 1px solid #666; text-align: center; 
+}
+
+#ratingDiv {
+height: 25%;
+border-bottom: 1px solid #666;  
+}
+.compatetor1 { 
+position: absolute;
+width : 32%; height : 22%; 
+border-radius : 100% ; border :4px solid #ff5454;
+margin-left: 3%; margin-top: 2%;
+}
+.ratingName{
+color:#ff5454; margin-left: 28%;
+}
+.totalWins{
+	color:#ff5454; margin-left: 36%;
+}
+.ratingGame{
+	color:#ff5454; margin-left: 38%;
+}
+.mostPlayed{
+	color:#ff5454; margin-left: 36%;
+}
+#resultDiv {
+height: 20%; width: 150%;
+border-bottom: 1px solid #666;  
+}
+.compatetor { 
+position: absolute;
+width : 15%; height : 15%; 
+border-radius : 100% ; border :4px solid #ff5454;
+margin-left: 0.5%;
+}
+.own { 
+position: absolute;
+width : 15%; height : 15%; 
+border-radius : 100% ; border :4px solid #ff5454;
+margin-left: 46%; margin-top: -4%;
+}
+.oponent{
+	color: #ff5454; margin-left: 13%; margin-top: 5%;
+}
+.ownName{
+	color: #ff5454; margin-left: 46%; margin-top: -3%;
+}
+.result{
+	color: #ff5454; margin-left: 35%; margin-top: 4%; text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+.coverOfPalyers{
+	border-radius : 3% 3% 5% 5% ;
+	position: relative; margin-left: auto; 
+	margin-right: auto; display: block; 
+	width: 260px; height: 260px; max-width: 400px;
+}
+#profileofPlayer{
+top : 30%; left : 20% ; 
+width :43% ; height : 43% ; 
+border-radius : 100% ; 
+border :4px solid #ff5454;	
+}
+
+
+.subjectStyle{
+	border-radius : 3% 3% 5% 5% ;
+	position: relative; 
+	margin-left: auto; 
+	margin-right: auto; 
+	display: block; width: 260px; 
+	height: 260px; max-width: 400px;
+}
+
+
+
+
+
+
+.heading{
+	font-family : sans-serif ;
+	color : #ffffff ;
+	font-size : 28 ;
+	position : absolute ;
+}
+.loadBody{
+	background-color : #333;
+}
+.loadTable{
+	cell-pborder-style : hidden ; 
+	position : absolute ;
+	background-color : #333; 
+	top: 0; bottom: 0; left: 0; 
+	right: 0;
+}
+.loadTableRow{
+	border-style : hidden;
+	position : relative;
+	background-color : #333;
+	height: 30%; 
+	padding-bottom : 0em;
+}
+.loadImage{
+	width: 217%; height:85%;
+}
+.loadCover{
+	border : 4px solid #ff5454;
+	position : absolute ;
+	width : 27%; height : 25%; 
+	border-radius : 100%;
+	margin-top : -35%;
+}
+.wait{
+	color: white; height:10%; 
+	font-size:30px
+}
+
+
+
+
+
+
+
+
+
+
+.playerName{
+	font-family : sans-serif ;
+	color : #ffffff ;
+	font-size : 23 ;
+}
+.score{
+	color : ffffff; 
+	font-family:sans-serif;
+}
+#playProfilePic{ 	
+	width :28%; 
+	height : 25%; 
+	border-radius : 100% ; 
+	border :4px solid #ff5454;
+}
+.time{
+	color : #358ef2 ; margin-top : -9.5%;
+}
+.question{
+	font-family : sans-serif ;
+	color : #ffffff;
+}
+.choice{
+		width : 400px;
+		height : 70px;
+		background-color : #ffffff;
+		}
+		
+		
+		
+		
+		
+	
+
+	
+.resultPlayerName{
+	font-family : sans-serif;
+	color : #ffffff;
+	font-size : 25;
+}
+.resultScore{
+	color : ffffff; 
+	font-family:sans-serif;
+	font-size:40;
+}
+#resultProfilePic{
+	width :25%; 
+	height : 21%; 
+	border-radius : 100% ; 
+	border :4px solid #ff5454;
+	margin-top: -16%;
+}
+.scoreChart{
+	border-style:hidden; 
+	border-color:#333; float:left; 
+	margin-left:10%;
+}
+
+
+
+
+
+
+.updateInfo{
+	border: 2px solid #ff5454;
+color: #333;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 17px;
+font-weight: normal;
+margin: 0 0 7px;
+padding: 10px 5px;
+text-align: center;
+width: 400px;
+background-color:#2d99c0;
+font-style: bold;
+height: 20px;
+overflow: auto;
+resize: none;
+}
+#updatebody {
+color: #333; font-family: sans-serif; font-size: 14%; line-height: 1.2em;
+float : right ;border-radius : 20% 20% 0% 0%; width : 43% ; margin-right : 24% ; margin-top : 5%;
+}

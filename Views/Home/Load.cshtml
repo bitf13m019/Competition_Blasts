@@ -1,0 +1,42 @@
+﻿@{Layout = null;}
+@model Competition_Blasts_Project.Models.Player
+<html>
+<head>
+    <title>Loading</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+</head>
+@{
+    string fname = Session["FName"].ToString();
+    string lname = Session["LName"].ToString();
+    string cover = Session["Cover"].ToString();
+    string profile = Session["Profile"].ToString();
+}
+<body class="loadBody">
+    <table class="loadTable">
+        <tr class="loadTableRow">
+            <td>
+                <img src="@Url.Content(cover)" class="loadImage" style="width: 178%; height: 90%;">
+                <img src="@Url.Content(profile)" class="loadCover" style="margin-left :10%; margin-top: -20%;">
+                <h3 class="heading" style="margin-top : -12%;margin-left : 39%"><b>@fname @lname</b></h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="loginFields">
+                    <form name="loginForm" action="~/Home/Play" method="post">
+                            <input type="submit" name="submit" id="send" value="Proceed to Game" style="width: 247.3%; margin-left: -22%;" />
+                    </form>
+                </div>
+            </td>
+        </tr>
+        <tr class="loadTableRow">
+            <td>
+                <img src="@Url.Content(Model.CoverImagePath)" class="loadImage" style="width: 178%; height: 90%;">
+                <img src="@Url.Content(Model.ProfileImagePath)" class="loadCover" style="margin-left :120%;">
+                <h3 class="heading" style="margin-top : -30%; margin-left : 100%"><b>@Model.FirstName @Model.LastName</b></h3>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

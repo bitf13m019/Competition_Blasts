@@ -1,0 +1,223 @@
+﻿@{Layout = null;}
+@model Competition_Blasts_Project.Models.Player
+
+<html>
+<head>
+    <title>Setting</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#updateFName").click(function () {
+                $("#textFName").slideToggle("slow");
+                $("#submitFName").slideToggle("slow");
+            });
+            $("#updateLName").click(function () {
+                $("#textLName").slideToggle("slow");
+                $("#submitLName").slideToggle("slow");
+            });
+            $("#updateMobile").click(function () {
+                $("#uMobile").slideToggle("slow");
+                $("#sMobile").slideToggle("slow");
+            });
+            $("#updateAddress").click(function () {
+                $("#uAddress").slideToggle("slow");
+                $("#sAddress").slideToggle("slow");
+            });
+            $("#updateCity").click(function () {
+                $("#uCity").slideToggle("slow");
+                $("#sCity").slideToggle("slow");
+            });
+            $("#updatePassword").click(function () {
+                $("#Password").slideToggle("slow");
+                $("#nPassword").slideToggle("slow");
+                $("#nRPassword").slideToggle("slow");
+                $("#sPassword").slideToggle("slow");
+            });
+        });
+
+        function func1() {
+            var serviceURL1 = '/Home/loadNotification';
+            var pid1 = '@Model.PId';
+
+            $.ajax({
+                type: "Post",
+                url: serviceURL1,
+                success: successFunc,
+                data: { 'ID': pid1 },
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                var count = data.length;
+                if(count>0)
+                {
+                    for (var i = 0; i < count; i++) {
+                        var temp = data[i];
+                        var noti = temp.split(',');
+                        var f = "<li> <a href='~/Home/Profile' style='font-family : sans-serif;'> You have a Challenge in " + noti[0] + " The Challenger Scored " + noti[1] + " </a> </li>";
+                        $("#notification").before(f);
+                    }
+                }
+                else{
+                    var f = "<li> You Have No Notification Yet </li>";
+                    $("#notification").before(f);
+                }
+            }
+            function errorFunc(xhr, status, err) {
+                alert('error');
+            }
+
+        }
+        function start() {
+            func1();
+        }
+    </script>
+</head>
+<body onload="start()">
+    <div id="header">
+        <ul>
+            <li style="float: left; margin-left: -45%; font-size: 20px;" id="not">
+                <a href="~/Home/Profile" style="font-family : sans-serif; font-size: 10px; margin-top: -11px;">
+                    Notification
+                    <img src="~/Images/Noti1.png" style="margin-top: -9%; margin-right: 6%; width: 45%; height: 50%; border-radius : 100% ; border :4px solid #ff5454;">
+                </a>
+                <ul style="margin-right: 3%; width: 290%;">
+                    <li id="notification">
+
+                    </li>
+                </ul>
+            </li>
+            <li style="background-color : #ff5454;">
+                <a href="~/Home/Profile" style="font-family : sans-serif;">Profile</a>
+            </li>
+            <li>
+                <a href="~/Home/People" style="font-family : sans-serif;">People</a>
+            </li>
+            <li>
+                <a href="" style="font-family : sans-serif;">Followers</a>
+            </li>
+            <li>
+                <a href="" style="font-family : sans-serif;">Following</a>
+            </li>
+            <li>
+                <a href="~/Home/Profile" style="font-family : sans-serif;">@Model.FirstName</a>
+                <ul>
+                    <li>
+                        <a href="~/Home/Setting">Settings</a>
+
+                    </li>
+                    <li>
+                        <a href="~/Home/Logout" name="logout">Logout</a>
+
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        function show(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+                filerdr.onload = function (e) {
+                    $('#coverImg').attr('src', e.target.result);
+                    $("#imgSave").show("slow");
+
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+        function show1(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+
+                filerdr.onload = function (e) {
+                    $('#profileImg').attr('src', e.target.result);
+                    $("#imgSave1").show("slow");
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+    <div id="profile" style="height: 100%;  background-color: #333;">
+        <div id="profilepic" style="height: 100%;">
+
+            @Html.BeginForm("SaveImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })
+            <img src="@Url.Content(Model.CoverImagePath)" class="cover" id="coverImg">
+            <input type="file" style="width:100%; position: absolute; margin-top: -25.5%; margin-left: 50%; border-radius: 50%;" onchange="show(this)">
+            <h2 id="hh" style="margin-top: -50%;">@Model.FirstName @Model.LastName</h2>
+            <input id="imgSave" type="submit" value="Save" style="display: none; width: 40%; position: absolute; margin-top: -13.5%; margin-left: 45%; color: #333; background-color: #ff5454; font-size: 17px">
+
+            <img src="@Url.Content(Model.ProfileImagePath)" class="pic" style="margin-top: 80%; width: 50%;" id="profileImg">
+            <input type="file" style="width:100%; position: absolute; margin-top: 51.5%; margin-left: 12%; border-radius: 50%;" onchange="show1(this)">
+            <input id="imgSave1" type="submit" value="Save" style="display: none; width: 40%; position: absolute; margin-top: -1%; margin-left: 45%; color: #333; background-color: #ff5454; font-size: 17px">
+
+        </div>
+    </div>
+    <div id="updatebody">
+        <table border="0" style="width : 420px;background-color : #eeeeee;">
+            <tr>
+                <td>
+                    <p>First Name: @Model.FirstName</p>
+                    <input type="text" id="textFName" class="updateInfo" placeholder="Enter New First Name" style="display: none">
+                </td>
+                <td>
+                    <input id="updateFName" type="button" value="Update">
+                    <input id="submitFName" type="button" value="Submit" style="display: none">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Last Name: @Model.LastName</p>
+                    <input type="text" id="textLName" class="updateInfo" placeholder="Enter New Last Name" style="display: none">
+                </td>
+                <td>
+                    <input id="updateLName" type="button" value="Update">
+                    <input id="submitLName" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p>Mobile: @Model.Mobile</p>
+                    <input type="text" id="uMobile" class="updateInfo" placeholder="Enter New Mobile Number" style="display: none">
+                </td>
+                <td>
+                    <input id="updateMobile" type="button" value="Update">
+                    <input id="sMobile" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p>Address: @Model.Address</p>
+                    <input type="text" id="uAddress" class="updateInfo" placeholder="Enter New Address" style="display: none">
+                </td>
+                <td>
+                    <input id="updateAddress" type="button" value="Update">
+                    <input id="sAddress" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p>City: @Model.City</p>
+                    <input type="text" id="uCity" class="updateInfo" placeholder="Enter New City" style="display: none">
+                </td>
+                <td>
+                    <input id="updateCity" type="button" value="Update">
+                    <input id="sCity" type="button" value="Submit" style="display: none">
+            </tr>
+            <tr>
+                <td>
+                    <p>Password: @Model.Password</p>
+                    <input type="password" id="Password" class="updateInfo" placeholder="Enter Current Password" style="display: none">
+                    <input type="password" id="nPassword" class="updateInfo" placeholder="Enter New Password" style="display: none">
+                    <input type="password" id="nRPassword" class="updateInfo" placeholder="Renter New Password" style="display: none">
+                </td>
+                <td>
+                    <input id="updatePassword" type="button" value="Update">
+                    <input id="sPassword" type="button" value="Submit" style="display: none">
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

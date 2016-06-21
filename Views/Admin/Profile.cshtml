@@ -1,0 +1,57 @@
+﻿@{ Layout = null;}
+@model Competition_Blasts_Project.Models.Admin
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="~/Content/Style.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <title>Admin Profile</title>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ff5454;">
+            <div id="header">
+                <ul>
+                    <li>
+                        @Html.ActionLink("Profile", "Profile", "Admin");
+                    </li>
+                    <li>
+                        @Html.ActionLink("People", "People", "Admin");
+                    </li>
+                    <li>
+                        @Html.ActionLink("Subject", "Subject", "Admin");
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Add Subject", "Subject", "Admin");
+                            </li>
+                            <li>
+                                @Html.ActionLink("Add Questions", "Subject", "Admin");
+                            </li>
+                            <li>
+                                @Html.ActionLink("Update Questions", "Subject", "Admin");
+                            </li>
+                        </ul>
+                    </li>
+                    <li style="width: 220px">
+                        @Html.ActionLink(Model.FirstName, "Profile", "Admin");
+                        <ul style="width: 220px">
+                            <li>
+                                @Html.ActionLink("Setting", "Setting", "Admin");
+                            </li>
+                            <li>
+                                @Html.ActionLink("Logout", "Logout", "Home");
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="profile">
+            <div id="profilepic">
+                <img src="@Url.Content(Model.CoverImagePath)" class="cover">
+                <h2 id="hh">@Model.FirstName @Model.LastName</h2>
+                <img src="@Url.Content(Model.ProfileImagePath)" class="pic">
+            </div>
+        </div>
+    </body>
+</html>

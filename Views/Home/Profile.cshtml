@@ -1,0 +1,225 @@
+﻿@{Layout = null;}
+@model Competition_Blasts_Project.Models.Player
+
+<html>
+<head>
+    <title>Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        function func1() {
+            var serviceURL1 = '/Home/loadNotification';
+            var pid1 = '@Model.PId';
+
+            $.ajax({
+                type: "Post",
+                url: serviceURL1,
+                success: successFunc,
+                data: { 'ID': pid1 },
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                var count = data.length;
+                if(count>0)
+                {
+                    for (var i = 0; i < count; i++) {
+                        var temp = data[i];
+                        var noti = temp.split(',');
+                        var f = "<li> <a href='~/Home/Profile' style='font-family : sans-serif;'> You have a Challenge in " + noti[0] + " The Challenger Scored " + noti[1] + " </a> </li>";
+                        $("#notification").before(f);
+                    }
+                }
+                else{
+                    var f = "<li> You Have No Notification Yet </li>";
+                    $("#notification").before(f);
+                }
+            }
+            function errorFunc(xhr, status, err) {
+                alert('error');
+            }
+
+        }
+        function func2() {
+            var serviceURL = '/Home/loadStatus';
+            var pid = '@Model.PId';
+
+            $.ajax({
+                type: "Post",
+                url: serviceURL,
+                success: successFunc,
+                data: { 'ID': pid },
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                var count = data.length;
+                if(count >0)
+                {
+                    for (var i = 0; i < count; i++) {
+                        var f = "<div style='border: 1; background: #333;'><p style='color: #ffffff'>" + data[i] + "</p></div>";
+                        $("#s").after(f);
+                    }
+                }
+                else
+                {
+                    var f = "<div style='border: 1; background: #333;'><p style='color: #ffffff'> You Did not Added Any Status Yet </p></div>";
+                    $("#s").after(f);
+                }
+            }
+            function errorFunc(xhr, status, err) {
+                alert('error');
+            }
+        }
+        function start() {
+            func1();
+            func2();
+        }
+        $(document).ready(function () {
+            $("#buttonspec").click(function () {
+                var status = $("#whatsup").val();
+                $("#whatsup").val("");
+                var serviceURL = '/Home/submitStatus';
+                var id = '@Model.PId';
+                
+                $.ajax({
+                    type: "Post",
+                    url: serviceURL,
+                    success: successFunc,
+                    data: { 'sta': status, 'ID': id },
+                    error: errorFunc
+                });
+
+                function successFunc(data) {
+                    var f = "<div style='border: 1; background: #333;'><p style='color: #ffffff'>" + data + "</p></div>";
+                    $("#s").after(f);
+                }
+                function errorFunc(xhr, status, err) {
+                    alert('error');
+                }
+            });
+        });
+</script>
+</head>
+<body onload="start()">
+    <div id="header">
+        <ul>
+            <li style="float: left; margin-left: -45%; font-size: 20px;" id="not">
+                <a href="~/Home/Profile" style="font-family : sans-serif; font-size: 10px; margin-top: -11px;">
+                    Notification
+                    <img src="~/Images/Noti1.png" style="margin-top: -9%; margin-right: 6%; width: 45%; height: 50%; border-radius : 100% ; border :4px solid #ff5454;">
+                </a>
+                <ul style="margin-right: 3%; width: 290%;">
+                    <li id="notification">
+
+                    </li>
+                </ul>
+            </li>
+            <li style="background-color : #ff5454;">
+                <a href="~/Home/Profile" style="font-family : sans-serif;">Profile</a>
+            </li>
+            <li>
+                <a href="~/Home/People" style="font-family : sans-serif;">People</a>
+            </li>
+            <li>
+                <a href="" style="font-family : sans-serif;">Followers</a>
+            </li>
+            <li>
+                <a href="" style="font-family : sans-serif;">Following</a>
+            </li>
+            <li style="width: 220px">
+                <a href="~/Home/Profile" style="font-family : sans-serif;">@Model.FirstName</a>
+                <ul style="width: 220px">
+                    <li>
+                        <a href="~/Home/Setting">Settings</a>
+                    </li>
+                    <li>
+                        <a href="~/Home/Logout" name="logout">Logout</a>
+
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="profile">
+        <div id="profilepic">
+            <img src="@Url.Content(Model.CoverImagePath)" class="cover">
+            <h2 id="hh">@Model.FirstName @Model.LastName</h2>
+            <img src="@Url.Content(Model.ProfileImagePath)" class="pic">
+        </div>
+        <div id="starttopic">
+            <div id="competition">
+                <h1 style="font-family : sans-serif ; font-size : 20px; margin-left:-31%; color:#ff5454;">Recently Played With</h1>
+            </div>
+            <div id="resultDiv">
+                <img src="~/Images/cric.jpg" class="compatetor">
+                <h2 class="oponent">Abdullah</h2>
+                <img src="@Url.Content(Model.ProfileImagePath)" class="own">
+                <h2 class="ownName">@Model.FirstName</h2>
+                <h2 class="result">You looses</h2>
+            </div>
+            <div id="resultDiv">
+                <img src="~/Images/cric.jpg" class="compatetor">
+                <h2 class="oponent">Abdullah</h2>
+                <img src="@Url.Content(Model.ProfileImagePath)" class="own">
+                <h2 class="ownName">@Model.FirstName</h2>
+                <h2 class="result">You looses</h2>
+            </div>
+            <div id="resultDiv">
+                <img src="~/Images/cric.jpg" class="compatetor">
+                <h2 class="oponent">Abdullah</h2>
+                <img src="@Url.Content(Model.ProfileImagePath)" class="own">
+                <h2 class="ownName">@Model.FirstName</h2>
+                <h2 class="result">You looses</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainbody">
+        <section id="status">
+            <form style="width : 80% ; padding : 20px 90px 10px 20px ; margin-left: 5%">
+                <textarea id="whatsup" placeholder="What is in your mind right know???" style="margin-top : 4px;"></textarea>
+            </form>
+            <footer>
+                <input type="button" value="Post" id="buttonspec" style="float : right;">
+            </footer>
+        </section>
+    </div>
+    <br><br>
+    <div style="background-color: #ff5454; float: right; width: 43%; margin-right: 24%;">
+        <center style="font-size: 20px;">
+            <p id="s"> </p>
+        </center>
+    </div>
+    <div id="chatDiv">
+        <div id="chatDiv1">
+            <h1 style="font-family : sans-serif ; font-size : 20px; color:#ff5454;">Top Players</h1>
+        </div>
+        <div id="ratingDiv">
+            <img src="~/Images/cric.jpg" class="compatetor1">
+            <h5 class="ratingName"> Muhammad Abdullah</h5>
+            <h5 class="totalWins"> Total Wins 50</h5>
+            <h5 class="ratingGame"> Best Game Played: DSA</h5>
+            <h5 class="mostPlayed"> Most Played: OOP</h5>
+        </div>
+        <div id="ratingDiv">
+            <img src="~/Images/cric.jpg" class="compatetor1">
+            <h5 class="ratingName"> Muhammad Abdullah</h5>
+            <h5 class="totalWins"> Total Wins 50</h5>
+            <h5 class="ratingGame"> Best Game Played: DSA</h5>
+            <h5 class="mostPlayed"> Most Played: OOP</h5>
+        </div>
+        <div id="ratingDiv">
+            <img src="~/Images/cric.jpg" class="compatetor1">
+            <h5 class="ratingName"> Muhammad Abdullah</h5>
+            <h5 class="totalWins"> Total Wins 50</h5>
+            <h5 class="ratingGame"> Best Game Played: DSA</h5>
+            <h5 class="mostPlayed"> Most Played: OOP</h5>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+﻿@{Layout = null;}
+@model Competition_Blasts_Project.Models.Player
+<html>
+<head>
+    <title> Competition Blasts SignUp</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/script.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var finalM = "1";
+            var finalP = "1";
+            var finalE = "1";
+
+            $("#Password").blur(function () {
+                var p = $("#Password").val();
+                if (p.length < 5 || p.length > 49) {
+                    alert("Password Length is not Valid!");
+                    $("#send").hide("slow");
+                    finalP = "0";
+                }
+                else if (p.length > 5 || p.length < 49)
+                {
+                    finalP = "1";
+                }
+            });
+            $("#pass1").blur(function () {
+                var p = $("#pass1").val();
+                if (p.length > 5 || p.length < 49) {
+
+                    var p1 = $("#Password").val();
+                    if (p != p1) {
+                            finalP = "0";
+                            $("#showPassword").show("slow");
+                            $("#send").hide("slow");
+                        }
+                    else if (p === p1)
+                    {
+                        finalP = "1";
+                        $("#showPassword").hide("slow");
+                        if(finalP == "1" && finalM =="1" && finalE =="1") {
+                            $("#send").show("slow");
+                        }
+                    }                    
+                }
+                else {
+                    alert("Password Length is not Valid!");
+                    $("#send").hide("slow");
+                    finalP = "0";
+                }
+            });
+            $("#Mobile").blur(function () {
+                var m = $("#Mobile").val();
+                if (m.length !== 11) {
+                    finalM = "0";
+                    $("#showMobile").show("slow");
+                    $("#send").hide("slow");
+                }
+                else if (m.length === 11)
+                {
+                    finalM = "1";
+                    $("#showMobile").hide("slow");
+                    if (finalP == "1" && finalM == "1" && finalE == "1")
+                       $("#send").show("slow");
+                }
+                else if (m.length === 11 && finalM == "1") {
+                }
+
+            });
+            $("#Email").blur(function () {
+                var e = $("#Email").val();
+                var serviceURL = '/Home/verifyEmail';
+
+                    $.ajax({
+                        type: "Post",
+                        url: serviceURL,
+                        success: successFunc,
+                        data: {'email': e},
+                        error: errorFunc
+                    });
+
+                    function successFunc(data) {
+                        
+                        if (data === "1") {
+                            $("#showEmail").hide("slow");
+                            finalE = "1";
+                            if (finalP == "1" && finalM == "1" && finalE == "1")
+                                $("#send").show("slow");
+                        }
+                        else if (data == "0") {
+                            finalE = "0";
+                            $("#send").hide("slow");
+                            $("#showEmail").show("slow");
+                        }
+                    }
+                    function errorFunc(xhr, status, err) {
+                        alert('error');
+                    }
+            });
+        });
+    </script>
+</head>
+<body class="bodyImage">
+    <div class="divImage">
+        <div id="signUpFields">
+            <img src="~/Images/c.png" class="loginImageLogo">
+            <br><br><br>
+            <h1><span>SignUp with Email</span></h1>
+            <br><br>
+            <form action="/Home/SignUpProfile" method="post" name="signUpForm">
+                <br><br>
+                <center>
+                    @Html.TextBox("FirstName", null, new { placeholder = "First Name", id = "FirstName", required = "Required" })
+                    @Html.TextBox("LastName", null, new { placeholder = "Last Name", id = "LastName", required = "Required" })
+                    @Html.ValidationMessageFor(Model=> Model.FirstName)
+                    @Html.ValidationMessageFor(Model => Model.LastName)
+                    @Html.TextBox("Mobile", null, new { placeholder = "Mobile", id = "Mobile", required = "Required" })
+                    @Html.TextBox("Address", null, new { placeholder = "Address", id = "Address", required = "Required" })
+                    @Html.ValidationMessageFor(Model => Model.Mobile)
+                    @Html.ValidationMessageFor(Model => Model.Address)
+                    <h3 id="showMobile" style="display: none; color:#ff5454; font-size:15px;">Your Provied Phone Number is not Valid. Please provide Valid Phone Number</h3>
+                    @Html.TextBox("City", null, new { placeholder = "City", id = "City", required = "Required" })
+                    <input type="email" required name="Email" id="Email" placeholder="E-mail">
+                    @Html.ValidationMessageFor(Model => Model.City)
+                    @Html.ValidationMessageFor(Model => Model.Email)
+                    <h3 id="showEmail" style="display: none; color:#ff5454; font-size:15px;">Your Provied E-mial already Exits. Please SignUp with another E-Mail</h3>
+                    @Html.Password("Password", null, new { placeholder = "Password", id = "Password", required = "Required" })
+                    @Html.Password("pass1", null, new { placeholder = "Confirm Password", id = "pass1", required = "Required" })
+                    <h3 id="showPassword" style="display: none; color:#ff5454; font-size:15px;">Your Provied Password Dose Not Match</h3>
+                    @Html.ValidationMessageFor(Model => Model.Password)
+                </center>
+                <br>
+
+                <input type="submit" name="submit" id="send" value="Sign Up">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

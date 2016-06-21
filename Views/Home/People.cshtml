@@ -1,0 +1,242 @@
+﻿@{Layout = null;}
+@model List<Competition_Blasts_Project.Models.Player>
+<html>
+<head>
+    <title>People</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    @{
+        string i = Session["ID"].ToString();
+        int pid = int.Parse(i);
+        string fname = Session["FName"].ToString();
+        string lname = Session["LName"].ToString();
+        string cover = Session["Cover"].ToString();
+        string profile = Session["Profile"].ToString(); ;
+    }
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        function func1() {
+            var serviceURL1 = '/Home/loadNotification';
+            var pid1 = '@pid';
+
+            $.ajax({
+                type: "Post",
+                url: serviceURL1,
+                success: successFunc,
+                data: { 'ID': pid1 },
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                var count = data.length;
+                if(count>0)
+                {
+                    for (var i = 0; i < count; i++) {
+                        var temp = data[i];
+                        var noti = temp.split(',');
+                        var f = "<li> <a href='~/Home/Profile' style='font-family : sans-serif;'> You have a Challenge in " + noti[0] + " The Challenger Scored " + noti[1] + " </a> </li>";
+                        $("#notification").before(f);
+                    }
+                }
+                else{
+                    var f = "<li> You Have No Notification Yet </li>";
+                    $("#notification").before(f);
+                }
+            }
+            function errorFunc(xhr, status, err) {
+                alert('error');
+            }
+
+        }
+        function start() {
+            func1();
+        }
+    </script>
+</head>
+<body onload="start()">
+    <div id="header">
+        <ul>
+            <li style="float: left; margin-left: -45%; font-size: 20px;" id="not">
+                <a href="~/Home/Profile" style="font-family : sans-serif; font-size: 10px; margin-top: -11px;">
+                    Notification
+                    <img src="~/Images/Noti1.png" style="margin-top: -9%; margin-right: 6%; width: 45%; height: 50%; border-radius : 100% ; border :4px solid #ff5454;">
+                </a>
+                <ul style="margin-right: 3%; width: 290%;">
+                    <li id="notification">
+
+                    </li>
+                </ul>
+            </li>
+            <li style="background-color : #ff5454;">
+                <a href="~/Home/Profile" style="font-family : sans-serif;">Profile</a>
+            </li>
+            <li>
+                <a href="~/Home/People" style="font-family : sans-serif;">People</a>
+            </li>
+            <li>
+                <a href="" style="font-family : sans-serif;">Followers</a>
+            </li>
+            <li>
+                <a href="" style="font-family : sans-serif;">Following</a>
+            </li>
+            <li style="width: 220px">
+                <a href="~/Home/Profile" style="font-family : sans-serif;">@fname</a>
+                <ul style="width: 220px">
+                    <li>
+                        <a href="~/Home/Setting">Settings</a>
+
+                    </li>
+                    <li>
+                        <a href="~/Home/Logout" name="logout">Logout</a>
+
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="profile">
+    <div id="profilepic">
+        <img src="@Url.Content(cover)" class="cover">
+        <h2 id="hh">@fname @lname</h2>
+        <img src="@Url.Content(profile)" class="pic">
+    </div>
+    <div id="starttopic">
+        <div id="competition">
+            <h1 style="font-family : sans-serif ; font-size : 20px; margin-left:-31%; color:#ff5454;">Recently Played With</h1>
+        </div>
+        <div id="resultDiv">
+            <img src="~/Images/cric.jpg" class="compatetor">
+            <h2 class="oponent">Abdullah</h2>
+            <img src="@Url.Content(profile)" class="own">
+            <h2 class="ownName">@fname</h2>
+            <h2 class="result">You looses</h2>
+        </div>
+        <div id="resultDiv">
+            <img src="~/Images/cric.jpg" class="compatetor">
+            <h2 class="oponent">Abdullah</h2>
+            <img src="@Url.Content(profile)" class="own">
+            <h2 class="ownName">@fname</h2>
+            <h2 class="result">You looses</h2>
+        </div>
+        <div id="resultDiv">
+            <img src="~/Images/cric.jpg" class="compatetor">
+            <h2 class="oponent">Abdullah</h2>
+            <img src="@Url.Content(profile)" class="own">
+            <h2 class="ownName">@fname</h2>
+            <h2 class="result">You looses</h2>
+        </div>
+    </div>
+</div>
+
+        <div id="mainbody">
+            <table border="0" style="">
+                @{
+                    int count = Model.Count;
+                    bool flag = false;
+                    if (count % 2 == 0)
+                    {
+                        flag = true;
+                    }
+                    else
+                    {
+                        count--; 
+                    }
+                    for (int j = 0; j < count; j = j+2)
+                    {
+                        <tr>
+                            @if(pid != Model[j].PId)
+                            { 
+                                <td style="position: relative">
+                                    <img src="@Url.Content( Model[j].CoverImagePath)" class="coverOfPalyers">
+                                    <p style='position : absolute ; top : -5% ; left : 20% ; color : white ; font-size : 150% ;font-family : sans-serif;'>
+                                        <b>@Model[j].FirstName  @Model[j].LastName</b>
+                                    </p>
+                                    <img src="@Url.Content(Model[j].ProfileImagePath)" class='pic' id="profileofPlayer">
+                                    <button name='button_1' value='person_1' style='position: absolute; left: 30px; top : 80%;'>Follow</button>
+                                    <form action="~/Home/Subject/@Model[j].PId" method="post">
+                                        <button name='playButton_1' style='position: absolute; left: 115px; top : 80%'>Play</button>
+                                    </form>
+                                    <button style='position: absolute; left: 190px; top : 80%'>Chat</button>
+                                </td>
+                                <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            }
+                            
+                            @if (pid != Model[j+1].PId)
+                            { 
+
+                                <td style="position: relative">
+                                    <img src="@Url.Content( Model[j+1].CoverImagePath)" class="coverOfPalyers">
+                                    <p style='position : absolute ; top : -5% ; left : 20% ; color : white ; font-size : 150% ;font-family : sans-serif;'>
+                                        <b>@Model[j+1].FirstName  @Model[j+1].LastName</b>
+                                    </p>
+                                    <img src="@Url.Content(Model[j+1].ProfileImagePath)" class='pic' id="profileofPlayer">
+                                    <button name='button_1' value='person_1' style='position: absolute; left: 30px; top : 80%;'>Follow</button>
+                                    <form action="~/Home/Subject/@Model[j+1].PId" method="post">
+                                        <button name='playButton_1' style='position: absolute; left: 115px; top : 80%'>Play</button>
+                                    </form>
+                                    <button style='position: absolute; left: 190px; top : 80%'>Chat</button>
+                                    </td>
+                            }
+                        </tr>
+                    }
+                    
+                    if (flag==false)
+                    {
+                        if(pid != Model[count].PId)
+                        { 
+                             <tr>
+                                <td style="position: relative">
+                                    <img src="@Url.Content(Model[count].CoverImagePath)" class="coverOfPalyers">
+                                    <p style='position : absolute ; top : -5% ; left : 20% ; color : white ; font-size : 150% ;font-family : sans-serif;'>
+                                        <b>@Model[count].FirstName  @Model[count].LastName</b>
+                                    </p>
+                                    <img src="@Url.Content(Model[count].ProfileImagePath)" class='pic' id="profileofPlayer">
+                                    <button name='button_1' value='person_1' style='position: absolute; left: 30px; top : 80%;'>Follow</button>
+                                    <form action="~/Home/Subject/@Model[count].PId" method="post">
+                                        <button name='playButton_1' style='position: absolute; left: 115px; top : 80%'>Play</button>
+                                    </form>
+                                    <button style='position: absolute; left: 190px; top : 80%'>Chat</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </table>
+        </div>
+    <div id="chatDiv">
+        <div id="chatDiv1">
+            <h1 style="font-family : sans-serif ; font-size : 20px; color:#ff5454;">Top Players</h1>
+        </div>
+        <div id="ratingDiv">
+            <img src="~/Images/cric.jpg" class="compatetor1">
+            <h5 class="ratingName"> Muhammad Abdullah</h5>
+            <h5 class="totalWins"> Total Wins 50</h5>
+            <h5 class="ratingGame"> Best Game Played: DSA</h5>
+            <h5 class="mostPlayed"> Most Played: OOP</h5>
+        </div>
+        <div id="ratingDiv">
+            <img src="~/Images/cric.jpg" class="compatetor1">
+            <h5 class="ratingName"> Muhammad Abdullah</h5>
+            <h5 class="totalWins"> Total Wins 50</h5>
+            <h5 class="ratingGame"> Best Game Played: DSA</h5>
+            <h5 class="mostPlayed"> Most Played: OOP</h5>
+        </div>
+        <div id="ratingDiv">
+            <img src="~/Images/cric.jpg" class="compatetor1">
+            <h5 class="ratingName"> Muhammad Abdullah</h5>
+            <h5 class="totalWins"> Total Wins 50</h5>
+            <h5 class="ratingGame"> Best Game Played: DSA</h5>
+            <h5 class="mostPlayed"> Most Played: OOP</h5>
+        </div>
+    </div>
+</body>
+</html>

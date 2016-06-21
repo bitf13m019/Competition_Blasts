@@ -1,0 +1,207 @@
+﻿@{Layout = null;}
+@model Competition_Blasts_Project.Models.Player
+@{
+    string fname = Session["FName"].ToString();
+    string lname = Session["LName"].ToString();
+    string cover = Session["Cover"].ToString();
+    string profile = Session["Profile"].ToString();
+    string score1 = Session["P1Score"].ToString();
+    string score2 = Session["P2Score"].ToString();
+    int p1Score = int.Parse(score1);
+    int p2score = int.Parse(score2);
+
+}
+<html>
+<head>
+    <title>Game</title>
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script>
+        var qc = 1;
+        function load() {
+            qc = '@int.Parse(Session["QCount"].ToString())';
+        getQ(qc);
+    }
+    // Get Question
+    function getQ(qc) {
+        var serviceURL1 = '/Home/getQuestion';
+        var sub = '@int.Parse(Session["SubID"].ToString())';
+        var que = qc;
+            $.ajax({
+                type: "Post",
+                url: serviceURL1,
+                success: successFunc,
+                data: { 'subId': sub, 'qId': que },
+                error: errorFunc
+            });
+
+            function successFunc(data) {
+                if (data != null) {
+                    $("#message").html(data['Question']);
+                    $("#A").val(data['OptionA']);
+                    $("#B").val(data['OptionB']);
+                    $("#C").val(data['OptionC']);
+                    $("#D").val(data['OptionD']);
+                }
+                else
+                    alert("No data");
+            }
+            function errorFunc(xhr, status, err) {
+                alert('error');
+            }
+        }
+        $(document).ready(function () {
+            var value = "No";
+            $("#A").click(function () {
+                value = $("#A").val()
+                var c = qc;
+                check("A", c);
+            });
+            $("#B").click(function () {
+                value = $("#B").val();
+                var c = qc;
+                check("B", c);
+            });
+            $("#C").click(function () {
+                value = $("#C").val();
+                var c = qc;
+                check("C", c);
+            });
+            $("#D").click(function () {
+                value = $("#D").val();
+                var c = qc;
+                check("D", c);
+            });
+        });
+        // Verify Answer
+        function check(value, c) {
+            var serviceURL1 = '/Home/verifyQuestion';
+            var sub = '@int.Parse(Session["SubID"].ToString())';
+            var que = c;
+            $.ajax({
+                type: "Post",
+                url: serviceURL1,
+                success: successFunc,
+                data: { 'subId': sub, 'qId': que, 'button': value },
+                error: errorFunc
+            });
+            function successFunc(data) {
+                if (data != null) {
+                    var result = data;
+                    var SC = result.split(",");
+                    $("#p1").html(SC[0]);
+                    qc++;
+                    if (que < 5) {
+                        getQ(SC[1]);
+                    }
+                    else {
+                        abc();
+                    }
+                }
+                else
+                    alert("No data");
+            }
+            function errorFunc(xhr, status, err) {
+                alert('error');
+            }
+        }
+        function abc()
+        {
+            setTimeout(Redirect(), 2000);
+            function Redirect() {
+                location.href = '/Home/Result';
+            }
+        }
+    </script>
+</head>
+
+<body class="loadBody" onload="load()">
+    <table border="0" style="margin-top : 2.5%;">
+        <tr style="height : 150px;">
+            <td style="width : 455.3px ; ">
+                <img src="@Url.Content(profile)" id="playProfilePic">
+                <h3 class="playerName" style="float: left; margin-left: 40%; margin-top: -18%;">@fname @lname</h3>
+                <h3 id="p1"class="score" style="float: left; margin-left: 40%; margin-top: -10%;">@p1Score</h3>
+            </td>
+            <td>
+            </td>
+            <td style="width: 400px;"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="width : 455.3px ;">
+                <img src="@Url.Content(Model.ProfileImagePath)" id="playProfilePic" style="float: right; margin-right: -25%;">
+                <h3 class="playerName" style="float : right; margin-right: 13%; margin-top: 5%;">@Model.FirstName @Model.LastName</h3>
+                <h3 class="score" style="float: right; margin-right: -34%; margin-top: 13.5%;">@p2score</h3>
+            </td>
+        </tr>
+    </table>
+
+    <center>
+            <h1 id="message" class="question">Question Will Appear Here</h1><br>
+            <table>
+                <tr>
+                    <td>
+                        <input type="button" id="A" class="choice" value="Option A" style="font-size: 20px; color: #333; font-style: oblique; font-family: sans-serif; font-weight: 100;" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="button" id="B" class="choice" value="Option B" style="font-size: 20px; color: #333; font-style: oblique; font-family: sans-serif; font-weight: 100;"/>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        <input type="button" id="C" class="choice" value="Option C" style="font-size: 20px; color: #333; font-style: oblique; font-family: sans-serif; font-weight: 100;"  />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="button" id="D" class="choice" value="Option D" style="font-size: 20px; color: #333; font-style: oblique; font-family: sans-serif; font-weight: 100;" />
+                    </td>
+                </tr>
+            </table>
+        
+    </center>
+</body>
+</html>
